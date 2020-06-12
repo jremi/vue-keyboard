@@ -1,18 +1,43 @@
 # vue-keyboard
 
-> A Vue.js project
+> 一个适用于验证码以及密码校验的虚拟数字键盘
+> a Virtual numeric keypboard for Verification code or Password
 
-## Build Setup
+![使用方法](https://gitee.com/taoyouyou/keyboard/raw/master/gif5.gif)
 
+## 使用方法
+
+引入组件并注册
+
+for Verification:
 ``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+<vue-keyboard :number="codeNum" :time="30" :verifyBtn='verifyBtn' :loading="loading" :phone="phone" @submit="submit" @send="sendCode"  @close="close" @on-time-change="onTimeChange" v-if="showKeyboard"></vue-keyboard>
 
-# build for production with minification
-npm run build
+```
+for Password:
+``` bash
+
+<vue-keyboard v-if="showPassword" type="password" :number="6" placeholder=' ' desc="您正在更改重要信息，输入密码支付进行安全验证" @submit="checkPayPwd" @close="showPassword = false"  @forget="forgetPassword"></vue-keyboard>
+
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+### 属性
+- type: String 控件类型(verify || password),默认为verify
+- number: Array 验证码长度
+- placeholder: String 占位符
+
+- verifyBtn: Object 支持自动定义验证码按钮文字，描述，以及按钮状态 (仅用于验证码组件)
+- loading: Boolean 控制验证码状态 (仅用于验证码组件)
+- phone: Number 自定义传入需要发送验证码的手机号  (仅用于验证码组件)
+- time: Number 自定义倒计时的秒数 (仅用于验证码组件)
+
+- desc: 描述  (仅用于密码组件)
+
+### 方法
+- submit 完成输入验证码之后自动触发该方法，验证码作为传入的参数
+- sendCode 发送验证码
+- close 关闭组件
+- forget 忘记密码 (仅用于密码组件)
