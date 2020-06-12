@@ -1,6 +1,7 @@
 # vue-keyboard
 
 > 一个适用于验证码以及密码校验的虚拟数字键盘
+
 > a Virtual numeric keypboard for Verification code or Password
 
 ![使用方法](https://gitee.com/taoyouyou/keyboard/raw/master/gif5.gif)
