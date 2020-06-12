@@ -4,7 +4,7 @@
 
 > a Virtual numeric keypboard for Verification code or Password
 
-![使用方法](https://gitee.com/taoyouyou/keyboard/raw/master/gif5.gif)
+![使用方法](https://gitee.com/taoyouyou/vue-keyboard/raw/master/gif5.gif)
 
 
 

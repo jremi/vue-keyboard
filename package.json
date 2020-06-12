@@ -1,7 +1,7 @@
 {
   "name": "vue-verify-keyboard",
   "description": "a Virtual numeric keypboard for Verification code or Password",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "taoyouyou <853094838@qq.com>",
   "license": "MIT",
   "private": false,
