@@ -1,4 +1,4 @@
-# vue-keyboard
+# vue-verify-keyboard
 
 > 一个适用于验证码以及密码校验的虚拟数字键盘
 
@@ -6,20 +6,31 @@
 
 ![使用方法](https://gitee.com/taoyouyou/keyboard/raw/master/gif5.gif)
 
+
+
+## 引入组件并注册
+
+```
+import vueKeyboard from 'vue-verify-keyboard'
+
+Vue.use(vueKeyboard)
+```
+
 ## 使用方法
 
-引入组件并注册
+
+
 
 for Verification:
 ``` bash
 
-<vue-keyboard :number="codeNum" :time="30" :verifyBtn='verifyBtn' :loading="loading" :phone="phone" @submit="submit" @send="sendCode"  @close="close" @on-time-change="onTimeChange" v-if="showKeyboard"></vue-keyboard>
+<vue-verify-keyboard :number="codeNum" :time="30" :verifyBtn='verifyBtn' :loading="loading" :phone="phone" @submit="submit" @send="sendCode"  @close="close" @on-time-change="onTimeChange" v-if="showKeyboard"></vue-verify-keyboard>
 
 ```
 for Password:
 ``` bash
 
-<vue-keyboard v-if="showPassword" type="password" :number="6" placeholder=' ' desc="您正在更改重要信息，输入密码支付进行安全验证" @submit="checkPayPwd" @close="showPassword = false"  @forget="forgetPassword"></vue-keyboard>
+<vue-verify-keyboard v-if="showPassword" type="password" :number="6" placeholder=' ' desc="您正在更改重要信息，输入密码支付进行安全验证" @submit="checkPayPwd" @close="showPassword = false"  @forget="forgetPassword"></vue-verify-keyboard>
 
 ```
 

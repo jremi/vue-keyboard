@@ -1,14 +1,14 @@
 {
-  "name": "vue-keyboard",
-  "description": "A Vue.js project",
-  "version": "1.0.0",
+  "name": "vue-verify-keyboard",
+  "description": "a Virtual numeric keypboard for Verification code or Password",
+  "version": "1.0.2",
   "author": "taoyouyou <853094838@qq.com>",
   "license": "MIT",
   "private": false,
   "main": "dist/vue-keyboard.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/skique/vue-keyboard"
+    "url": "https://github.com/skique/vue-keyboard.git"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
