@@ -4,26 +4,26 @@
     <div class="mask" @click="close()"></div>
     <div class="security-code-wrap">
       <label for="code">
-        <p class="title">安全验证
-          <span class="close" @click="close()"><i class="fa fa-remove"></i></span>
+        <p class="title">
+          <span class="title-text" v-if="title">{{title}}</span>
+          <span class="close" v-if="showClose" @click="close()"><i class="fa fa-remove"></i></span>
         </p>
         <div class="security-code-container">
-          <p class="desc" v-if="type === 'verify'">验证码已发送至手机 +86 {{phone}}</p>
+          <p class="desc" v-if="type === 'verify'">{{verifyText}}</p>
           <p class="desc grey-9" v-if="type === 'password'">{{desc}}</p>
           <ul class="code-container">
             <li class="field-wrap" v-for="(item, index) in number" :key="index">
               <i class="char-field">{{type === 'password' ? value[index] ? '*' : '' :  value[index] || placeholder}}</i>
             </li>
           </ul>
-          <div class="op-wrap" v-if="type==='verify'">
-            <span class="btn" @click="sendCode()">{{verifyBtn.text}}</span>
+          <div class="op-wrap" v-if="!pinValid">
             <p class="desc red" v-show="verifyBtn.desc">
               <i class="fa fa-spinner fa-pulse" v-if="loading"></i>
               {{verifyBtn.desc}}
             </p>
           </div>
-          <div class="text-warp" v-if="type === 'password'">
-            <span class="forget" @click="forget()"><i class="fa fa-question-circle-o fa-lg"></i>&nbsp;忘记密码</span>
+          <div class="op-wrap" v-else>
+            <p class="desc"></p>
           </div>
         </div>
       </label>
@@ -56,6 +56,22 @@
 export default {
   name: 'vueKeyboard',
   props: {
+    pinValid: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: null
+    },
+    showClose: {
+      type: Boolean,
+      default: false
+    },
+    verifyText: {
+      type: String,
+      default: null
+    },
     number: {
       type: Number,
       default: 4
@@ -68,10 +84,6 @@ export default {
       type: String,
       default: 'verify'
     },
-    phone: {
-      type: String,
-      default: '15587168512'
-    },
     loading: {
       type: Boolean,
       default: false
@@ -80,15 +92,11 @@ export default {
       type: Object,
       default: function () {
         return {
-          text: '获取验证码',
-          enable: true,
-          desc: '验证码发送成功，请注意查收'
+          text: null,
+          enable: false,
+          desc: null
         }
       }
-    },
-    time: {
-      type: Number,
-      default: 60
     },
     desc: {
       type: String,
@@ -104,23 +112,6 @@ export default {
   },
   created () {
     document.addEventListener('touchstart', function () {}, false)
-    this.countDown()
-    // this.sendCode()
-  },
-  watch: {
-    loading (val) {
-      if (val) {
-        this.verifyBtn.desc = '验证中，请稍后...'
-      } else {
-        clearTimeout(this.timer)
-      }
-    },
-    time (val) {
-      this.mytime = val
-    },
-    mytime (val) {
-      this.$emit('on-time-change', val)
-    }
   },
   methods: {
     _handleKeyPress (e) {
@@ -153,35 +144,8 @@ export default {
         }
       }
     },
-    countDown () {
-      const self = this
-      self.mytime = self.time
-      self.timer = setInterval(() => {
-        self.mytime -= 1
-        if (self.mytime <= 0) {
-          clearInterval(self.timer)
-          self.verifyBtn.text = '重新发送'
-          self.verifyBtn.enable = true
-          return
-        }
-        self.verifyBtn.text = parseInt(self.mytime) + 's'
-        self.verifyBtn.enable = false
-      }, 1000)
-    },
     close () {
-      const self = this
-      clearInterval(self.timer)
       this.$emit('close')
-    },
-    sendCode () {
-      if (this.verifyBtn.enable) {
-        this.value = ''
-        this.countDown()
-        this.$emit('send')
-      }
-    },
-    forget () {
-      this.$emit('forget')
     }
   }
 }
